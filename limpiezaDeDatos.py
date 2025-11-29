@@ -207,7 +207,52 @@ def revision(dfLimpio: pd.DataFrame):
     print(dfLimpio.isnull().sum())
     print(dfLimpio.isnull().sum()/len(dfLimpio))
 
+#Voy a crear una columna para poder clasificar el tama;o de las farmacias segun los trabajadores que tenga, para esto voy a guiarme con la columna de estrato
+def clasificacionTamaño(dfLimpio: pd.DataFrame): #me marcaba error si usaba la ñ
+    clasificacion = {
+        "0 a 5 personas": "MICRO",
+        "6 a 10 personas": "PEQUEÑA",
+        "11 a 30 personas": "MEDIANA",
+        "31 a 50 personas": "MEDIANA GRANDE",
+        "101 a 250 personas": "GRANDE",
+        "251 y más personas": "CORPORATIVA",
+    }
 
+    dfLimpio["Clasificacion_tamaño"] = dfLimpio["Estrato"].map(clasificacion).fillna("Sin clasificar")
+
+    return dfLimpio
+
+#aqui voy a hacer otra columna para clasificar si las farmacias son cadenas o si son independientes me ayudare de la columna de nombre con las farmacias que
+#yo por propio conocimiento se que son cadenas y de las que no se si lo son hare un conteo para la columna nombre
+def clasificarModelo(dfLimpio: pd.DataFrame):
+    #esta es la lista de las farmacias que yo ya se que son cadenas
+    farmacias = [
+        "FARMACIA GUADALAJARA",
+        "FARMACIA SIMILARES",
+        "FARMACIA DEL AHORRO",
+        "FARMACIA BENAVIDES",
+        "FARMACIA YZA",
+        "FARMACIA ROMA",
+        "FARMACIA INTEGRA",
+        "FARMACIA LA MAS BARATA"
+    ]
+    conteo = dfLimpio["Nombre"].value_counts()
+    cadenasEncontradas = set(conteo[conteo > 5].index)
+
+    #aqui unire las dos listas de cadenas anteriores
+    totalCadenas= set(farmacias).union(cadenasEncontradas)
+
+#aqui esta funcion es para asignar la clasificacion
+    def modelo(nombre):
+        if nombre in totalCadenas:
+            return "CADENA"
+        else:
+            return "INDEPENDIENTE"
+
+#aplico la función
+    dfLimpio["Modelo_farmacia"] = dfLimpio["Nombre"].apply(modelo)
+
+    return dfLimpio
 
 if __name__=="__main__":
     estructura(dfLimpio)
@@ -241,6 +286,10 @@ if __name__=="__main__":
     dfLimpio=recortarNombreFarmacias(dfLimpio)
     print("=====================================================")
     revision(dfLimpio)
+    print("======================================================")
+    clasificacionTamaño(dfLimpio)
+    print("=======================================================")
+    clasificarModelo(dfLimpio)
 
     #rviso cambios q no he guardado
     print(dfLimpio[[ "Ubicacion", "Clase_actividad"]].head(20))
@@ -250,7 +299,6 @@ if __name__=="__main__":
     print(dfLimpio[["Nombre"]].head(40))
     print(dfLimpio[["Consultorio"]].head(40))
     print(dfLimpio[["Nombre"]].head(60))
-
 
     dfLimpio.to_csv("farmaciasCompletoLimpio.csv", index=False)
 
