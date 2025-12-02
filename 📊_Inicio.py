@@ -3,6 +3,15 @@ import streamlit as st
 def app_principal():
     st.set_page_config(page_title="Proyecto final",
                        page_icon="🏥")
+
+    LOGO_URL = "https://images.vexels.com/media/users/3/136559/isolated/preview/624dd0a951a1e8a118215b1b24a0da59-logotipo-de-farmacia.png"
+
+    st.logo(
+        LOGO_URL,
+        icon_image=LOGO_URL,
+        size="large"
+    )
+
     #Logo de uabc
     st.image("https://fca.tij.uabc.mx/web/image/website/1/logo/FCA%20Tijuana?unique=b8c791b", width=250)
     #Titulo de la pagina
