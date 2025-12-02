@@ -201,6 +201,19 @@ def recortarNombreFarmacias(dfLimpio: pd.DataFrame):
     dfLimpio["Nombre"] = dfLimpio["Nombre"].apply(limpiar)
     return dfLimpio
 
+#hubo una confusion con el nombre de las farmacias similares asi que corregire este error de escritura para que las graficas sean confiables
+#Usare un diccionario para coregir los nombres porque si usaba el replace uno por uno se hacia un desastre com los nombres.
+#porque reemplazaba las incidencias y se terminaba cambiando el nombre a cosas como similareses, con el diccionario es mas esfectivo
+def corregirSimilares(dfLimpio: pd.DataFrame):
+    dfLimpio["Nombre"] = dfLimpio["Nombre"].replace({
+        "FARMACIA DE SIMILARES": "FARMACIA SIMILARES",
+        "FARMACIA SIMILAR": "FARMACIA SIMILARES",
+        "FARMACIA SIMILARS":"FARMACIA SIMILARES",
+        "FARMACIA SIMILIARES":"FARMACIA SIMILARES",
+        "FARMACIA DE GENERICOS CVS SIMILARES": "FARMACIA SIMILARES"
+    })
+    return dfLimpio
+
 #checo datos por ultima vez para ver que tal estan
 def revision(dfLimpio: pd.DataFrame):
     print(dfLimpio.columns)
@@ -285,6 +298,8 @@ if __name__=="__main__":
     print("=====================================================")
     dfLimpio=recortarNombreFarmacias(dfLimpio)
     print("=====================================================")
+    dfLimpio=corregirSimilares(dfLimpio)
+    print("======================================================")
     revision(dfLimpio)
     print("======================================================")
     clasificacionTamaño(dfLimpio)
