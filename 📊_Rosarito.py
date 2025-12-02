@@ -11,9 +11,7 @@ from AgrupacionesRosarito import modeloFarmaciaRosarito
 from AgrupacionesRosarito import tipoVialidadR
 
 
-
 farmaciasCompletoLimpio=pd.read_csv("farmaciasCompletoLimpio.csv")
-
 
 def stremlitApp():
     #Titulo
