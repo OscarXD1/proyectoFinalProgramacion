@@ -3,7 +3,7 @@ import streamlit as st
 def app_principal():
     st.set_page_config(page_title="Proyecto final",
                        page_icon="🏥")
-    #Logo de uabc jejejeje
+    #Logo de uabc
     st.image("https://fca.tij.uabc.mx/web/image/website/1/logo/FCA%20Tijuana?unique=b8c791b", width=250)
     #Titulo de la pagina
     st.markdown(

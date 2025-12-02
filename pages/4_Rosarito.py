@@ -24,7 +24,6 @@ def stremlitApp():
         unsafe_allow_html=True
     )
 
-
     #Divisor
     st.markdown(
         """
