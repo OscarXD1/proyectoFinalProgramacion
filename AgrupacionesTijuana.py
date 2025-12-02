@@ -12,7 +12,6 @@ def AgrupacionTijuana(farmaciasCompletoLimpio):
     Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
     farmaciasxcoloniaT = Tijuana.groupby('Colonia').size().reset_index(name='Num_Farmacias')
     print(farmaciasxcoloniaT)
-    farmaciasxcoloniaT.to_csv('TijuanaFarmaciasColonia.csv', index=False)
     return farmaciasxcoloniaT
 
 # ============================================================
@@ -26,7 +25,6 @@ def ConsultoriosPorcentajeTijuana(farmaciasCompletoLimpio):
     )
     totalT = consultorioT["Num_Farmacias"].sum()
     consultorioT["Porcentaje"] = (consultorioT["Num_Farmacias"] / totalT * 100).round(2)
-    consultorioT.to_csv('TijuanaFarmaciasConsultorio.csv', index=False)
     print(consultorioT)
     return consultorioT
 #el 3 se realiza sacando del 2
@@ -41,8 +39,6 @@ def CadenasTijuana(farmaciasCompletoLimpio):
         .sort_values(by="Num_Farmacias", ascending=False)
     )
     cadenasT_filtrado = CadenasTijuana[CadenasTijuana["Num_Farmacias"] > 1]
-    cadenasT_filtrado.to_csv('TijuanaCadenasProdominantes.csv', index=False)
-
     print(cadenasT_filtrado)
     return cadenasT_filtrado
 
@@ -56,7 +52,6 @@ def TamaFarmaT(farmaciasCompletoLimpio):
         .reset_index(name="Num_Farmacias")
         .sort_values(by="Num_Farmacias", ascending=False)
     )
-    tamaT.to_csv('TijuanaFarmacias_por_tamaño.csv', index=False)
     print(tamaT)
     return tamaT
 
@@ -70,8 +65,6 @@ def ServicioT(farmaciasCompletoLimpio):
         .reset_index(name="Num_Farmacias")
         .sort_values(by="Num_Farmacias", ascending=False)
     )
-
-    serviciosT.to_csv('TijuanaServiciosFarmacias.csv', index=False)
     print(serviciosT)
     return serviciosT
 #el 7 se realiza con csv original
@@ -86,8 +79,6 @@ def ModeloFarmaciaTijuana(farmaciasCompletoLimpio):
         .reset_index(name="Num_Farmacias")
         .sort_values(by="Num_Farmacias", ascending=False)
     )
-
-    ModeloT.to_csv('TijuanaModeloFarmacias.csv', index=False)
     print(ModeloT)
     return ModeloT
 
@@ -101,8 +92,6 @@ def TipoVialidadT(farmaciasCompletoLimpio):
         .reset_index(name="Num_Farmacias")
         .sort_values(by="Num_Farmacias", ascending=False)
     )
-
-    vialidadesT.to_csv('TijuanaVialidades.csv', index=False)
     print(vialidadesT)
     return vialidadesT
 
