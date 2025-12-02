@@ -1,3 +1,11 @@
+#ESTE DASHBOARD hace uso del tema farmacias en baja california
+#funciona con las librerias vistas en clase y
+#hacemos uso de las agrupaciones en tijuana y se busca resolver metrics para poder
+#compararlas con un municipio mas chico como en este caso rosarito
+#se hacen graficas con agrupaciones y se hacen graficas interactivas usando el df original
+#respondiendo a un total de 9 preguntas/metricas que se establecieron en grupo
+#a continuacion el codigo completo del dashboard de tijuana y con sus respectivas explicaciones
+
 # las librerias que vamos a usar pandas para manipular datos streamlit para el dashboard y plotly para las graficas
 import streamlit as st
 import plotly.express as px
@@ -59,6 +67,7 @@ PALETA_AZUL_VERDE = [
     "#66BB6A",  # verde medio
     "#2E7D32"   # verde intenso
 ]
+
 # cargo el archivo originals
 df = pd.read_csv("farmaciasCompletoLimpio.csv")
 df_tijuana = df[df["Ubicacion"].str.lower() == "tijuana"].copy()
@@ -90,6 +99,7 @@ basado en el *Directorio Estadístico Nacional de Unidades Económicas (DENUE) d
 ### Objetivo 🎯 
 Brindar una visión clara, moderna y profesional del ecosistema de farcamacias en Tijuana.
 """)
+
 # tabla filtrada
 st.subheader(" Dataframe General de Farmacias en Tijuana 📄")
 st.dataframe(df_tijuana, width=1200, height=300)
@@ -103,6 +113,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 1. Colonias con más farmacias
 # ==============================
@@ -132,7 +143,7 @@ fig1 = px.bar(
     color_continuous_scale=PALETA_AZUL_VERDE
 )
 fig1.update_traces(textposition="inside", textfont=dict(size=14, color="white"))
-fig1.update_layout(
+fig1.update_layout( #update para configurar la figura un update layout
     title=f"Top {len(df1)} Colonias con más Farmacias",
     xaxis_title="Colonia",
     yaxis_title="Número de Farmacias",
@@ -172,6 +183,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 2. Porcentaje de consultorios
 # ==============================
@@ -199,6 +211,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 3. Métricas Consultorios
 # ==============================
@@ -226,6 +239,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 4. Top cadenas
 # ==============================
@@ -236,7 +250,6 @@ cadenas_agrupado = CadenasTijuana(df)
 cadenas_ordenadas = cadenas_agrupado.sort_values(
     by="Num_Farmacias", ascending=False
 )
-
 fig4 = px.pie(
     cadenas_ordenadas,
     names="Nombre",
@@ -259,6 +272,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 5. Tamaño predominante
 # ==============================
@@ -290,7 +304,6 @@ fig5 = px.bar(
     color="Tamaño",
     color_discrete_sequence=PALETA_AZUL_VERDE
 )
-
 fig5.update_traces(textposition="outside")
 fig5.update_layout( #update para configurar la figura un update layout
     xaxis_title="Tamaño del establecimiento",
@@ -326,6 +339,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 6. Clase de actividad (Treemap)
 # ==============================
@@ -339,7 +353,7 @@ fig6 = px.treemap(
     color="Clase_actividad",
     color_discrete_sequence=PALETA_AZUL_VERDE
 )
-fig6.update_traces(
+fig6.update_traces( #update para configurar la figura un update layout
     textfont=dict(
         color="white",  # azul profesional
         size=18,  # más grande y visible
@@ -377,6 +391,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 7. Mapa interactivo
 # ==============================
@@ -415,6 +430,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 8. Cadena vs independiente
 # ==============================
@@ -470,7 +486,7 @@ fig81= px.pie(
     title="Distribución Total: Cadenas vs Independientes",
     color_discrete_sequence=PALETA_AZUL_VERDE
 )
-fig81.update_traces(
+fig81.update_traces( #update para configurar la figura un update layout
     textinfo="percent+label",
     textfont_size=16
 )
@@ -488,6 +504,7 @@ st.markdown(
         " />
         """,
         unsafe_allow_html=True)
+
 # ==============================
 # 9. Tipo de vialidad
 # ==============================
