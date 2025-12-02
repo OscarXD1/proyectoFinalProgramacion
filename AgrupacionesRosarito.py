@@ -10,18 +10,15 @@ Rosarito = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'PLAY
 
 # 1. CUANTAS FARMACIAS HAY POR COLONIA EN ROSARITO?
 #Para ello primero lo agrupamos por colonia y contamos cuantas hay
-def AgrupacionRosarito(farmaciasCompletoLimpio):
+def agrupacionRosarito(farmaciasCompletoLimpio):
     farmaciasxcoloniaR = Rosarito.groupby('Colonia').size().reset_index(name='Num_Farmacias')
     print(farmaciasxcoloniaR)
-
-
-    farmaciasxcoloniaR.to_csv('FarmaciasRosaritoColonia.csv', index=False)
 
     return farmaciasxcoloniaR
 
 
 # 2. FARMACIAS CON CONSULTORIO (PORCENTAJE)
-def ConsultoriosPorcentaje(farmaciasCompletoLimpio):
+def consultoriosPorcentaje(farmaciasCompletoLimpio):
     #Contamos cuantas farmacias tienen consultorio y cuantas no
     Rosarito = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'PLAYAS DE ROSARITO']
 
@@ -32,10 +29,7 @@ def ConsultoriosPorcentaje(farmaciasCompletoLimpio):
     totalconR = consultorioR["Num_Farmacias"].sum()
     consultorioR["Porcentaje"] = (consultorioR["Num_Farmacias"] / totalconR * 100).round(2)
 
-    consultorioR.to_csv('FarmaciasConsultorioRosarito.csv', index=False)
-
     print(consultorioR)
-
     return consultorioR
 
 
@@ -45,7 +39,7 @@ def ConsultoriosPorcentaje(farmaciasCompletoLimpio):
 
 
 # 4. CADENAS DE FARMACIA PREDOMINANTES EN ROSARITO
-def CadenasRosarito(farmaciasCompletoLimpio):
+def cadenasRosarito(farmaciasCompletoLimpio):
     Rosarito = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'PLAYAS DE ROSARITO']
 
     CadenasRosarito= (Rosarito.groupby("Nombre")["Id"].count()
@@ -53,92 +47,86 @@ def CadenasRosarito(farmaciasCompletoLimpio):
             .sort_values(by="Num_Farmacias", ascending=False))
 
     cadenasR_filtrado = CadenasRosarito[CadenasRosarito["Num_Farmacias"] > 1]
-    cadenasR_filtrado.to_csv('CadenasProdominantesRosarito.csv', index=False)
-
 
     print(cadenasR_filtrado)
+    return cadenasR_filtrado
+
 
 
 # 5. TAMAÑO DE FARMACIA PREDOMINANTE (Clasificacion_tamaño)
-def TamaFarmaR(farmaciasCompletoLimpio):
+def tamaFarmaR(farmaciasCompletoLimpio):
     tamaR = (Rosarito.groupby("Clasificacion_tamaño")["Id"].count()
                .reset_index(name="Num_Farmacias")
                .sort_values(by="Num_Farmacias", ascending=False))
 
-    tamaR.to_csv('farmacias_por_tamaño_rosarito.csv', index=False)
-
     print(tamaR)
+    return tamaR
 
 
 # 6. FARMACIAS POR SERVICIO OTROGADO
-def ServicioR(farmaciasCompletoLimpio):
+def servicioR(farmaciasCompletoLimpio):
     serviciosR = (Rosarito.groupby("Clase_actividad")["Id"].count()
                   .reset_index(name="Num_Farmacias")
                   .sort_values(by="Num_Farmacias", ascending=False))
 
-    serviciosR.to_csv('ServiciosFarmaciasRosarito.csv', index=False)
-
-
     print(serviciosR)
+    return serviciosR
 
 
 
 # 7. Mapa de puntos
+#Está en el archivo de graficas !!
 
 
 # 8. Número de farmacias de cadena e independientes (Modelo_farmacia)
 
 
-def ModeloFarmaciaRosarito(farmaciasCompletoLimpio):
+def modeloFarmaciaRosarito(farmaciasCompletoLimpio):
     ModeloR = (Rosarito.groupby("Modelo_farmacia")["Id"].count()
                   .reset_index(name="Num_Farmacias")
                   .sort_values(by="Num_Farmacias", ascending=False))
 
-    ModeloR.to_csv('ModeloFarmaciaRosarito.csv', index=False)
-
-
     print(ModeloR)
+    return ModeloR
 
 
 
 
 # 9. En qué vialidades se encuentran más farmacias dentro del municipio
-def TipoVialidadR(farmaciasCompletoLimpio):
+def tipoVialidadR(farmaciasCompletoLimpio):
     vialidadesR = (Rosarito.groupby("Tipo_vialidad")["Id"].count()
                    .reset_index(name="Num_Farmacias")
                    .sort_values(by="Num_Farmacias", ascending=False))
 
-    vialidadesR.to_csv('VialidadesRosarito.csv', index=False)
-
-
     print(vialidadesR)
+    return vialidadesR
 
 
 
 if __name__ == '__main__':
     print("\n1. CUANTAS FARMACIAS HAY POR COLONIA EN ROSARITO?")
     print(" ")
-    AgrupacionRosarito(farmaciasCompletoLimpio)
+    agrupacionRosarito(farmaciasCompletoLimpio)
     print("\n2⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔")
     print("\n2. FARMACIAS CON CONSULTORIO (PORCENTAJE) y NUMERO DE FARMACIAS CON CONSULTORIO EN ROSARITO (TOTALES)")
     print(" ")
-    ConsultoriosPorcentaje(farmaciasCompletoLimpio)
+    consultoriosPorcentaje(farmaciasCompletoLimpio)
     print("\n⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔")
     print("\n4. CADENAS DE FARMACIA PREDOMINANTES EN ROSARITO")
     print(" ")
-    CadenasRosarito(farmaciasCompletoLimpio)
+    cadenasRosarito(farmaciasCompletoLimpio)
     print("\n2⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔")
     print(" ")
-    TamaFarmaR(farmaciasCompletoLimpio)
+    tamaFarmaR(farmaciasCompletoLimpio)
     print("\n6. FARMACIAS POR SERVICIO OTROGADO")
     print(" ")
-    ServicioR(farmaciasCompletoLimpio)
+    servicioR(farmaciasCompletoLimpio)
     print("\n⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔")
     print("\n8. Número de farmacias de cadena e independientes (Modelo_farmacia)")
     print(" ")
-    ModeloFarmaciaRosarito(farmaciasCompletoLimpio)
+    modeloFarmaciaRosarito(farmaciasCompletoLimpio)
     print("\n⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔")
     print("\n9. En qué vialidades se encuentran más farmacias dentro del municipio")
     print(" ")
-    TipoVialidadR(farmaciasCompletoLimpio)
+    tipoVialidadR(farmaciasCompletoLimpio)
     print("\n⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔")
