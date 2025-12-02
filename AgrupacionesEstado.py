@@ -14,10 +14,13 @@ def farmaciasMunicipio(farmaciasCompletoLimpio):
 
 
 #¿Cuántas farmacias cuentan con consultorio por municipio?
-def farmaciasconsultorio(farmaciasCompletoLimpio):
-    farmaciasCconsultorio =  (farmaciasCompletoLimpio.groupby("Ubicacion")["Consultorio"].count()
-                              .reset_index(name= "Numero_farmacias")
-                              .sort_values("Numero_farmacias", ascending=False))
+def farmaciasconsultorio(farmaciasCompletoLimpio):    # Filtramos solo farmacias que tengan consultorio
+    #filtramos las q tienen consultorio
+    con_consultorio = farmaciasCompletoLimpio[farmaciasCompletoLimpio["Consultorio"].str.upper().str.strip() == "SI"]  # o True, según tus datos
+
+    farmaciasCconsultorio = (con_consultorio.groupby("Ubicacion")["Consultorio"].count()
+                    .reset_index(name="Numero_farmacias")
+                    .sort_values("Numero_farmacias", ascending=False))
 
     return farmaciasCconsultorio
 
@@ -29,12 +32,21 @@ def consultorioporcentaje(df_farmaciasCconsultorio):
     return df_farmaciasCconsultorio
 
 
-#Qué porcentaje representa del total de farmacias representa cada municipio
+#Qué porcentaje representa cada municipio en el total de farmacias
+# ejemplo: tijuana 50%, rosarito 20%, etc es un pastelito
+def porcentajefarmacias(farmaciasCompletoLimpio):
+    porcentajeXmunicipio = (farmaciasCompletoLimpio.groupby("Ubicacion")["Id"].count()
+                    .reset_index(name="Numero_farmacias")
+                    .sort_values("Numero_farmacias", ascending=False))
+    total_farmacias = porcentajeXmunicipio["Numero_farmacias"].sum()
+    porcentajeXmunicipio["Porcentaje"] = (porcentajeXmunicipio["Numero_farmacias"] / total_farmacias * 100)
+
+    return porcentajeXmunicipio
 
 
 #En qué vialidad se encuentran más farmacias en el estado
 def vialidadfarmacias(farmaciasCompletoLimpio):
-    farmaciasXvialidad = (farmaciasCompletoLimpio.groupby("Tipo_vialidad")["Id"].count()
+    farmaciasXvialidad = (farmaciasCompletoLimpio.groupby(["Ubicacion", "Tipo_vialidad"])["Id"].count()
                              .reset_index(name="Numero_farmacias")
                              .sort_values("Numero_farmacias", ascending=False))
 
@@ -59,11 +71,22 @@ def cadenaspredominantes(farmaciasCompletoLimpio):
 
 
 #Farmacias por servicio otorgado
-def farmaciasservicio(farmaciasCompletoLimpio):
-    farmaciasXservicio = (farmaciasCompletoLimpio.groupby("Clase_actividad")["Id"].count()
-                            .reset_index(name="Numero_farmacias")
-                            .sort_values("Numero_farmacias", ascending=False))
-    return farmaciasXservicio
+def farmaciasservicio(farmaciasCompletoLimpio,  top_n=15):
+    farmaciasXservicio = (farmaciasCompletoLimpio.groupby("Clase_actividad")["Id"]
+          .count()
+          .reset_index(name="Numero_farmacias")
+          .sort_values("Numero_farmacias", ascending=False))
+
+    # Top N
+    top = farmaciasXservicio.head(top_n)
+
+    # Sumar el resto como "Otros"
+    otros_total = farmaciasXservicio["Numero_farmacias"][top_n:].sum()
+
+    if otros_total > 0:
+        top.loc[len(top)] = ["Otros", otros_total]
+
+    return top
 
 
 #Número de farmacias de cadena e independientes
@@ -82,6 +105,8 @@ if __name__=="__main__":
     df_farmaciasCconsultorio = farmaciasconsultorio(farmaciasCompletoLimpio)
     df_porcentaje = consultorioporcentaje(df_farmaciasCconsultorio)
     print("porcentaje de farmacias con consultorio", df_porcentaje)
+    print("===============================================")
+    print("porcentaje de farmacias x muni", porcentajefarmacias(farmaciasCompletoLimpio))
     print("===============================================")
     print("farmacias por vialidad", vialidadfarmacias(farmaciasCompletoLimpio))
     print("===============================================")
