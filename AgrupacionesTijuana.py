@@ -9,6 +9,7 @@ Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUA
 # 1. ¿CUÁNTAS FARMACIAS HAY POR COLONIA EN TIJUANA?
 # ============================================================
 def AgrupacionTijuana(farmaciasCompletoLimpio):
+    Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
     farmaciasxcoloniaT = Tijuana.groupby('Colonia').size().reset_index(name='Num_Farmacias')
     print(farmaciasxcoloniaT)
     farmaciasxcoloniaT.to_csv('TijuanaFarmaciasColonia.csv', index=False)
@@ -19,7 +20,6 @@ def AgrupacionTijuana(farmaciasCompletoLimpio):
 # ============================================================
 def ConsultoriosPorcentajeTijuana(farmaciasCompletoLimpio):
     Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
-
     consultorioT = (
         Tijuana.groupby("Consultorio")["Id"].count()
         .reset_index(name="Num_Farmacias")
@@ -35,7 +35,6 @@ def ConsultoriosPorcentajeTijuana(farmaciasCompletoLimpio):
 # ============================================================
 def CadenasTijuana(farmaciasCompletoLimpio):
     Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
-
     CadenasTijuana = (
         Tijuana.groupby("Nombre")["Id"].count()
         .reset_index(name="Num_Farmacias")
@@ -51,6 +50,7 @@ def CadenasTijuana(farmaciasCompletoLimpio):
 # 5. TAMAÑO DE FARMACIA PREDOMINANTE (Clasificación_tamaño)
 # ============================================================
 def TamaFarmaT(farmaciasCompletoLimpio):
+    Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
     tamaT = (
         Tijuana.groupby("Clasificacion_tamaño")["Id"].count()
         .reset_index(name="Num_Farmacias")
@@ -64,6 +64,7 @@ def TamaFarmaT(farmaciasCompletoLimpio):
 # 6. FARMACIAS POR SERVICIO OTORGADO
 # ============================================================
 def ServicioT(farmaciasCompletoLimpio):
+    Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
     serviciosT = (
         Tijuana.groupby("Clase_actividad")["Id"].count()
         .reset_index(name="Num_Farmacias")
@@ -79,13 +80,14 @@ def ServicioT(farmaciasCompletoLimpio):
 # 8. Modelo de farmacia (cadena / independiente)
 # ============================================================
 def ModeloFarmaciaTijuana(farmaciasCompletoLimpio):
+    Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
     ModeloT = (
         Tijuana.groupby("Modelo_farmacia")["Id"].count()
         .reset_index(name="Num_Farmacias")
         .sort_values(by="Num_Farmacias", ascending=False)
     )
 
-    ModeloT.to_csv('TijuanaModeloFarmacia.csv', index=False)
+    ModeloT.to_csv('TijuanaModeloFarmacias.csv', index=False)
     print(ModeloT)
     return ModeloT
 
@@ -93,6 +95,7 @@ def ModeloFarmaciaTijuana(farmaciasCompletoLimpio):
 # 9. Vialidades con más farmacias
 # ============================================================
 def TipoVialidadT(farmaciasCompletoLimpio):
+    Tijuana = farmaciasCompletoLimpio[farmaciasCompletoLimpio['Ubicacion'] == 'TIJUANA']
     vialidadesT = (
         Tijuana.groupby("Tipo_vialidad")["Id"].count()
         .reset_index(name="Num_Farmacias")
