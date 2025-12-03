@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def app_principal():
     st.set_page_config(page_title="Proyecto final",
                        page_icon="🏥")
