@@ -89,8 +89,14 @@ df_modelo = ModeloFarmaciaTijuana(df)
 df_vialidad = TipoVialidadT(df)
 
 #El inicio del dashboard
-st.title("Introducción al Dashboard de Farmacias en Baja California, Tijuana 📘 ")
-#explicacion
+st.markdown(
+        """
+        <h1 style='text-align:center; color:#003f88; font-size:3.2rem; font-weight:600;'>
+            Introducción al Dashboard de Farmacias en Baja California, Tijuana 📘
+        </h1>
+        """,
+        unsafe_allow_html=True
+    )#explicacion
 st.markdown("""
 Este dashboard presenta un análisis descriptivo de la distribución y características de las farmacias en **Tijuana**,  
 basado en el *Directorio Estadístico Nacional de Unidades Económicas (DENUE) del INEGI*.
@@ -106,6 +112,32 @@ basado en el *Directorio Estadístico Nacional de Unidades Económicas (DENUE) d
 ### Objetivo 🎯 
 Brindar una visión clara, moderna y profesional del ecosistema de farcamacias en Tijuana.
 """)
+# Divisor bonito con markdown
+st.markdown(
+        """
+        <hr style="
+            height:4px;
+            border:none;
+            background: linear-gradient(to right, #59a1ff, #0c50a8);
+        " />
+        """,
+        unsafe_allow_html=True
+    )
+
+
+# Musiquia para relajarse mientras lo ven
+st.audio("MusicaLofi.mp3", format="audio/mpeg", loop=True)
+
+st.markdown(
+        """
+        <hr style="
+            height:4px;
+            border:none;
+            background: linear-gradient(to right, #59a1ff, #0c50a8);
+        " />
+        """,
+        unsafe_allow_html=True
+    )
 
 # tabla filtrada
 st.subheader(" Dataframe General de Farmacias en Tijuana 📄")

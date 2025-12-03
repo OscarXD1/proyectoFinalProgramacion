@@ -245,6 +245,20 @@ def app_streamlit():
     )
     st.write("En esta página se visualiza la distribución de las farmacias a lo largo de el estado"
              " de Baja California, siguiendo métricas impuestas por el equipo y abriendo el análisis para los siguientes dashboards.")  #texto
+    #Divisor
+    st.markdown(
+        """
+        <hr style="
+            height:4px;
+            border:none;
+            background: linear-gradient(to right, #59a1ff, #0c50a8);
+        " />
+        """,
+        unsafe_allow_html=True
+    )
+
+    #Musiquia para relajarse mientras lo ven
+    st.audio("MusicaLofi.mp3", format="audio/mpeg", loop=True)
 
     (fig_mapa, fig_totalfarma, fig_farmaciasporcentaje,
      fig_consultorio, fig_consultorioporentaje, fig_farmaciasvialidad,
