@@ -225,11 +225,20 @@ def graficas():
 
 def app_streamlit():
     #te permite abrir todas tus gráficas juntas
+
+    #logo del estado d bc
+    st.markdown("""
+    <div style='text-align: center;'>
+        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Escudo_Baja_California.png/626px-Escudo_Baja_California.png' 
+             width='180'>
+
+    </div>
+    """, unsafe_allow_html=True)
     #título
     st.markdown(
         """
         <h1 style='text-align:center; color:#003f88; font-size:3.2rem; font-weight:600;'>
-            Dashboard estado de Baja California 📊👩🏻‍⚕
+            Dashboard estado de Baja California 🗺 ‍⚕
         </h1>
         """,
         unsafe_allow_html=True
