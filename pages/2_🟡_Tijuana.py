@@ -288,6 +288,7 @@ st.markdown(
 # ==============================
 # 4. Top cadenas
 # ==============================
+
 st.subheader("4️⃣ Participación Total de Cadenas en Tijuana 📊")
 cadenas_agrupado = CadenasTijuana(df)
 

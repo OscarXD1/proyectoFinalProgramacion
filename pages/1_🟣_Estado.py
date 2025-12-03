@@ -21,7 +21,6 @@ st.logo(
 st.set_page_config(page_title="Proyecto final",
                        page_icon="🏥")
 
-
 def graficas():
     # GRAFICA 1
     fig_mapa = px.scatter_map(dicc,
