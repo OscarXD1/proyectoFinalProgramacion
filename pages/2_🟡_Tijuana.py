@@ -21,6 +21,13 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+LOGO_URL = "https://images.vexels.com/media/users/3/136559/isolated/preview/624dd0a951a1e8a118215b1b24a0da59-logotipo-de-farmacia.png"
+st.logo(
+    LOGO_URL,
+    icon_image=LOGO_URL,
+    size="large"
+)
+
 # Fondo blanco + centro + tipografía Roboto, basicamente la configuracion visual del dashboard
 st.markdown("""
     <style>

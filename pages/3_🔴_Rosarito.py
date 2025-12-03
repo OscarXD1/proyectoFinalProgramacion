@@ -14,15 +14,33 @@ from AgrupacionesRosarito import tipoVialidadR
 farmaciasCompletoLimpio=pd.read_csv("farmaciasCompletoLimpio.csv")
 
 def stremlitApp():
+    LOGO_URL = "https://images.vexels.com/media/users/3/136559/isolated/preview/624dd0a951a1e8a118215b1b24a0da59-logotipo-de-farmacia.png"
+
+    st.logo(
+        LOGO_URL,
+        icon_image=LOGO_URL,
+        size="large"
+    )
+    st.set_page_config(page_title="Dashboard de Farmacias Tijuana", layout="wide")
+    st.markdown("""
+    <div style='text-align: center;'>
+        <img src='https://upload.wikimedia.org/wikipedia/commons/2/24/Escudo_de_Playas_de_Rosarito.png' 
+             width='180'>
+
+    </div>
+    """, unsafe_allow_html=True)
+
     #Titulo
     st.markdown(
         """
-        <h1 style='text-align:center; color:#003f88; font-size:2.2rem; font-weight:600;'>
+        <h1 style='text-align:center; color:#003f88; font-size:3.2rem; font-weight:600;'>
             Dashboard Playas de Rosarito 📊👩🏻‍⚕️
         </h1>
         """,
         unsafe_allow_html=True
     )
+
+    st.write("Dentro de esta pestaña podremos visualizar dististos gráficos que mostraran bastantes datos relevantes hacerla de la situación de acceso a medicamentos en el pequeño municipio de Playas de Rosarito")
 
     #Divisor
     st.markdown(

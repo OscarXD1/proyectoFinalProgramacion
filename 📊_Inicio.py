@@ -4,6 +4,7 @@ def app_principal():
     st.set_page_config(page_title="Proyecto final",
                        page_icon="🏥")
 
+    #Logo de la barra lateral
     LOGO_URL = "https://images.vexels.com/media/users/3/136559/isolated/preview/624dd0a951a1e8a118215b1b24a0da59-logotipo-de-farmacia.png"
 
     st.logo(

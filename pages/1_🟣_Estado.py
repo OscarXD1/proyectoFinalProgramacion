@@ -11,6 +11,14 @@ from AgrupacionesEstado import (farmaciasMunicipio, farmaciasconsultorio,
                                farmaciasservicio, independienteocadena)
 farmaciasCompletoLimpio = pd.read_csv("farmaciasCompletoLimpio.csv")
 
+LOGO_URL = "https://images.vexels.com/media/users/3/136559/isolated/preview/624dd0a951a1e8a118215b1b24a0da59-logotipo-de-farmacia.png"
+st.logo(
+    LOGO_URL,
+    icon_image=LOGO_URL,
+    size="large"
+)
+
+
 def graficas():
     # GRAFICA 1
     fig_mapa = px.scatter_map(dicc,
@@ -220,7 +228,7 @@ def app_streamlit():
     #título
     st.markdown(
         """
-        <h1 style='text-align:center; color:#003f88; font-size:2.2rem; font-weight:600;'>
+        <h1 style='text-align:center; color:#003f88; font-size:3.2rem; font-weight:600;'>
             Dashboard estado de Baja California 📊👩🏻‍⚕
         </h1>
         """,
