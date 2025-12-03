@@ -18,6 +18,9 @@ st.logo(
     size="large"
 )
 
+st.set_page_config(page_title="Proyecto final",
+                       page_icon="🏥")
+
 
 def graficas():
     # GRAFICA 1

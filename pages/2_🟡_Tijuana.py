@@ -11,6 +11,9 @@ import streamlit as st
 import plotly.express as px
 from AgrupacionesTijuana import *
 
+
+
+
 # configuramso la pagina
 st.set_page_config(page_title="Dashboard de Farmacias Tijuana", layout="wide")
 st.markdown("""
@@ -27,6 +30,9 @@ st.logo(
     icon_image=LOGO_URL,
     size="large"
 )
+
+st.set_page_config(page_title="Proyecto final",
+                       page_icon="🏥")
 
 # Fondo blanco + centro + tipografía Roboto, basicamente la configuracion visual del dashboard
 st.markdown("""

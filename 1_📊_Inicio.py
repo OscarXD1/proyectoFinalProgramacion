@@ -61,14 +61,27 @@ def app_principal():
     )
 
 
-    #Bloque de texto para el contexto del proyecto
+    #Para identificar el tema
+    theme = st.get_option("theme.base")
+
+    if theme == "dark":
+        bg_color = "#1E1E1E"  # Fondo oscuro
+        border_color = "#4FC3F7"  # Azul claro
+        text_color = "#FFFFFF"
+    else:
+        bg_color = "#f7f9fc"  # Fondo claro
+        border_color = "#0a2a43"  # Azul oscuro
+        text_color = "#000000"
+
+    #Texto
     st.markdown(
-        """
+        f"""
         <div style="
-            background-color:#f7f9fc;
+            background-color:{bg_color};
+            color:{text_color};
             padding:20px;
             border-radius:15px;
-            border-left:5px solid #0a2a43;
+            border-left:5px solid {border_color};
             font-size:18px;
             line-height:1.6;
         ">

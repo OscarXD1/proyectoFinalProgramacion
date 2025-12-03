@@ -21,7 +21,9 @@ def stremlitApp():
         icon_image=LOGO_URL,
         size="large"
     )
-    st.set_page_config(page_title="Dashboard de Farmacias Tijuana", layout="wide")
+
+    st.set_page_config(page_title="Proyecto final",
+                       page_icon="🏥")
     st.markdown("""
     <div style='text-align: center;'>
         <img src='https://upload.wikimedia.org/wikipedia/commons/2/24/Escudo_de_Playas_de_Rosarito.png' 
